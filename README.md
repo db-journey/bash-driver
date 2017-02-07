@@ -5,7 +5,7 @@
 ## Usage
 
 ```bash
-migrate -url bash://xxx -path ./migrations create increment_xyz
-migrate -url bash://xxx -path ./migrations up
-migrate help # for more info
+journey -url bash://xxx -path ./migrations create increment_xyz
+journey -url bash://xxx -path ./migrations up
+journey help # for more info
 ```
