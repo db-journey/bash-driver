@@ -11,23 +11,12 @@ import (
 type Driver struct {
 }
 
-// make sure our driver still implements the driver.Driver interface
-var _ driver.Driver = (*Driver)(nil)
-
-func (driver *Driver) Initialize(url string) error {
-	return nil
-}
-
-func (driver *Driver) FileTemplate() []byte {
-	return []byte("")
+func Open(url string) (driver.Driver, error) {
+	return &Driver{}, nil
 }
 
 func (driver *Driver) Close() error {
 	return nil
-}
-
-func (driver *Driver) FilenameExtension() string {
-	return "sh"
 }
 
 func (driver *Driver) Migrate(f file.File) error {
@@ -49,6 +38,12 @@ func (driver *Driver) Execute(commands string) error {
 	return exec.Command("sh", "-c", commands).Run()
 }
 
+type factory struct{}
+
+func (f factory) New(url string) (driver.Driver, error) {
+	return Open(url)
+}
+
 func init() {
-	driver.RegisterDriver("bash", &Driver{})
+	driver.Register("bash", "sh", nil, factory{})
 }
