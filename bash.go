@@ -8,6 +8,12 @@ import (
 	"github.com/db-journey/migrate/file"
 )
 
+var fileTemplate = []byte(``)
+
+func init() {
+	driver.Register("bash", "sh", fileTemplate, Open)
+}
+
 type Driver struct {
 }
 
@@ -36,14 +42,4 @@ func (driver *Driver) Versions() (file.Versions, error) {
 // Execute shell script
 func (driver *Driver) Execute(commands string) error {
 	return exec.Command("sh", "-c", commands).Run()
-}
-
-type factory struct{}
-
-func (f factory) New(url string) (driver.Driver, error) {
-	return Open(url)
-}
-
-func init() {
-	driver.Register("bash", "sh", nil, factory{})
 }
