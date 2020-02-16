@@ -4,8 +4,8 @@ package bash
 import (
 	"os/exec"
 
-	"github.com/db-journey/migrate/driver"
-	"github.com/db-journey/migrate/file"
+	"github.com/db-journey/migrate/v2/driver"
+	"github.com/db-journey/migrate/v2/file"
 )
 
 var fileTemplate = []byte(``)
